@@ -38,6 +38,6 @@ public enum ServiceEnum {
 			String providerKey) throws IOException, InstantiationException, IllegalAccessException {
 		return Arrays.stream(ServiceEnum.values())
 				.filter(value -> value.getProviderKey().equals(providerKey)).findFirst()
-				.orElseThrow(() -> new IOException("No provider found for the given key")).getService();
+				.orElseThrow(() -> new IOException("No service found for the given key")).getService();
 	}
 }

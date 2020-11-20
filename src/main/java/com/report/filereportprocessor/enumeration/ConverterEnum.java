@@ -36,6 +36,6 @@ public enum ConverterEnum {
 			String providerKey) throws IOException, InstantiationException, IllegalAccessException {
 		return Arrays.stream(ConverterEnum.values())
 				.filter(value -> value.getProviderKey().equals(providerKey)).findFirst()
-				.orElseThrow(() -> new IOException("No provider found for the given key")).getConverter();
+				.orElseThrow(() -> new IOException("No converter found for the given key")).getConverter();
 	}
 }
