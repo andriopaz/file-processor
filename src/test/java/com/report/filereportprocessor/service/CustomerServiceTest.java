@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.report.filereportprocessor.model.Customer;
+import com.report.filereportprocessor.service.impl.CustomerService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -19,10 +20,10 @@ public class CustomerServiceTest {
 	
 	@Test
 	void save_and_find_it() {
-		Customer customer = new Customer(1L, "12345678/0001", "John", "IT");
+		Customer customer = new Customer( "12345678/0001", "John", "IT");
 		customerService.save(customer);
 		
-		assertTrue(customerService.findAllCustomers().stream().filter(s -> "John".equalsIgnoreCase(s.getName()))
+		assertTrue(customerService.findAll().stream().filter(s -> "John".equalsIgnoreCase(s.getName()))
 				.findAny().isPresent());
 	}
 }

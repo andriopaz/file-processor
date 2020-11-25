@@ -1,4 +1,4 @@
-package com.report.filereportprocessor.service;
+package com.report.filereportprocessor.service.impl;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -8,24 +8,24 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Example;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.report.filereportprocessor.model.Salesman;
-import com.report.filereportprocessor.repository.SalesmanRepository;
+import com.report.filereportprocessor.service.IService;
 
 @Service
 @Transactional
 @Primary
-public class SalesmanService implements IService<Salesman> {
-
+public class SalesmanService extends BaseService<Salesman> implements IService<Salesman> {
+	
 	@Autowired
-	private SalesmanRepository salesmanRepository;
-
-	public List<Salesman> findAllSalesmans() {
-		return (List<Salesman>) salesmanRepository.findAll();
+	public SalesmanService(JpaRepository<Salesman, Long> repo) {
+		super(repo);
 	}
-
+	
+	
 	@Override
 	public boolean save(Salesman salesman) {
 		Optional<Salesman> result = findSalesmanByCPF(salesman.getCpf());
@@ -33,7 +33,7 @@ public class SalesmanService implements IService<Salesman> {
 			salesman.setId(result.get().getId());
 		}
 		
-		return salesmanRepository.save(salesman) != null;
+		return repo.save(salesman) != null;
 	}
 
 	public Optional<Salesman> findSalesmanByCPF(String cpf) {
@@ -41,19 +41,11 @@ public class SalesmanService implements IService<Salesman> {
 		salesman.setCpf(cpf);
 		Example<Salesman> example = Example.of(salesman);
 		
-		return salesmanRepository.findOne(example);
-	}
-
-	public void saveAll(List<Salesman> salesmanList) {
-		salesmanList.forEach(salesman -> this.save(salesman));
-	}
-
-	public long countSalesman() {
-		return salesmanRepository.count();
+		return repo.findOne(example);
 	}
 
 	public Optional<Salesman> getWorstSalesman() {
-		List<Salesman> salesmanList = salesmanRepository.findAll();
+		List<Salesman> salesmanList = repo.findAll();
 		
 		Collections.sort(salesmanList,Comparator.comparing(Salesman::getNumberOfSales)
 				.reversed()

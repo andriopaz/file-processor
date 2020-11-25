@@ -15,15 +15,17 @@ import lombok.Setter;
 @Entity
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor @EqualsAndHashCode
 public class Customer {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	protected Long id;
 	@Column(unique=true)
 	private String cnpj;
 	private String name;
 	private String businessArea;
 	
 	public Customer(String cnpj, String name, String businessArea) {
+		super();
 		this.cnpj = cnpj;
 		this.name = name;
 		this.businessArea = businessArea;

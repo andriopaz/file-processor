@@ -7,15 +7,17 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Getter @Setter @NoArgsConstructor @AllArgsConstructor
+@Getter @Setter @NoArgsConstructor @AllArgsConstructor @EqualsAndHashCode
 public class Sale {
+
 	@Id
-	private Long id;
+	protected Long id;
 	@ManyToOne(cascade=CascadeType.MERGE)
 	@JoinColumn(name = "salesman_id", referencedColumnName = "id")
 	private Salesman salesman;

@@ -7,28 +7,27 @@ import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.report.filereportprocessor.model.Sale;
 import com.report.filereportprocessor.model.Salesman;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@DataJpaTest
 @DirtiesContext(classMode = ClassMode.BEFORE_EACH_TEST_METHOD)
-public class SalesmanRepositoryTest {
-
+public class SaleRepositoryTest {
 	@Autowired
-	private SalesmanRepository salesmanRepository;
+	private SaleRepository saleRepository;
 
 	@Test
-	void save_and_find_it() {
-		Salesman salesman = new Salesman("12345678901", "Andrio Fonseca", 999.0);
-		salesmanRepository.save(salesman);
+	void saveAndFindIt() {
+		Sale sale = new Sale(1L, new Salesman("1234556", "Joseph Owe", 37123.00), 32.00);
+		saleRepository.save(sale);
 
-		Optional<Salesman> salesman2 = salesmanRepository.findById(1L);
-		assertEquals("Andrio Fonseca", salesman2.get().getName());
+		Optional<Sale> sale2 = saleRepository.findById(1L);
+		assertEquals(32.00, sale2.get().getPrice());
 	}
-
 }

@@ -1,0 +1,16 @@
+version: '2'
+services:
+    spring:
+        build:
+            context: .
+        container_name: myapp-spring
+        volumes:
+            - .:/app
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: 1214
+            MYSQL_DATABASE: "myapp"
+            MYSQL_USER: "sa"
+            MYSQL_PASSWORD: 1214
+        ports:
+            - 9000:9000

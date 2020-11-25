@@ -14,6 +14,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.report.filereportprocessor.model.Sale;
 import com.report.filereportprocessor.model.Salesman;
+import com.report.filereportprocessor.service.impl.SaleService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest

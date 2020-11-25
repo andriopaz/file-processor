@@ -18,7 +18,6 @@ import com.report.filereportprocessor.model.Customer;
 @DataJpaTest
 @DirtiesContext(classMode = ClassMode.BEFORE_EACH_TEST_METHOD)
 public class CustomerRepositoryTest {
-
 	@Autowired
 	private CustomerRepository customerRepository;
 

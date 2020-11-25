@@ -10,8 +10,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 import com.report.filereportprocessor.converter.IConverter;
-import com.report.filereportprocessor.enumeration.ConverterEnum;
-import com.report.filereportprocessor.enumeration.ServiceEnum;
+import com.report.filereportprocessor.enumeration.FileReportEnum;
 import com.report.filereportprocessor.exception.CannotReadException;
 import com.report.filereportprocessor.service.IService;
 
@@ -34,8 +33,8 @@ public class ProcessFactory {
 		try {
 			String prefix = line.substring(0, 3);
 			
-			converter =  applicationContext.getBean(ConverterEnum.getConverterByKey(prefix));
-			service = applicationContext.getBean(ServiceEnum.getServiceByKey(prefix));
+			converter =  applicationContext.getBean(FileReportEnum.getConverterByKey(prefix));
+			service = applicationContext.getBean(FileReportEnum.getServiceByKey(prefix));
 			
 			Optional<?> convertedObject = converter.convert(line);
 			service.save(convertedObject.get());

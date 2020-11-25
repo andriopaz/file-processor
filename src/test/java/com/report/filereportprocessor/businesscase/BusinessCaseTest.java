@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
 import java.util.Optional;
 
@@ -19,9 +20,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.report.filereportprocessor.model.Sale;
 import com.report.filereportprocessor.model.Salesman;
 import com.report.filereportprocessor.reader.FileReader;
-import com.report.filereportprocessor.service.CustomerService;
-import com.report.filereportprocessor.service.SaleService;
-import com.report.filereportprocessor.service.SalesmanService;
+import com.report.filereportprocessor.service.impl.CustomerService;
+import com.report.filereportprocessor.service.impl.SaleService;
+import com.report.filereportprocessor.service.impl.SalesmanService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -44,7 +45,7 @@ public class BusinessCaseTest {
 	
 	@Test
 	public void test_example_scenario() throws IOException {
-		FileWriter writer = new FileWriter(FILE_PATH);
+		FileWriter writer = new FileWriter(FILE_PATH, StandardCharsets.UTF_8);
 		
 		writer.write("001ç1234567891234çPedroç50000\n"
 				   + "001ç3245678865434çPauloç40000.99\n"
@@ -56,9 +57,9 @@ public class BusinessCaseTest {
 		
 		directoryFileReader.readFile(Paths.get(FILE_PATH));
 		
-		Long countCustomer = customerService.countCustomers();
-		Long salesmanCustomer = salesmanService.countSalesman();
-		Long saleCustomer = saleService.countSale();
+		Long countCustomer = customerService.count();
+		Long salesmanCustomer = salesmanService.count();
+		Long saleCustomer = saleService.count();
 		
 		Optional<Sale> mostExpensiveSale = saleService.getMostExpensiveSale(); 
 		Optional<Salesman> worstSalesman = salesmanService.getWorstSalesman();

@@ -11,6 +11,7 @@ import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.report.filereportprocessor.model.Salesman;
+import com.report.filereportprocessor.service.impl.SalesmanService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -25,7 +26,7 @@ public class SalesmanServiceTest {
 		Salesman salesman = new Salesman("63123", "Joseph", 949.0);
 		salesmanService.save(salesman);
 		
-		assertTrue(salesmanService.findAllSalesmans().stream().filter(s -> "Joseph".equalsIgnoreCase(s.getName()))
+		assertTrue(salesmanService.findAll().stream().filter(s -> "Joseph".equalsIgnoreCase(s.getName()))
 				.findAny().isPresent());
 	}
 }

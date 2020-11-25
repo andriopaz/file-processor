@@ -12,9 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import com.report.filereportprocessor.service.CustomerService;
-import com.report.filereportprocessor.service.SaleService;
-import com.report.filereportprocessor.service.SalesmanService;
+import com.report.filereportprocessor.service.impl.CustomerService;
+import com.report.filereportprocessor.service.impl.SaleService;
+import com.report.filereportprocessor.service.impl.SalesmanService;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -62,8 +62,8 @@ public class ReportCreator {
 	}
 	
 	private void fetchInformation() {
-		this.setTotalCustomers(customerService.countCustomers());
-		this.setTotalSalesman(salesmanService.countSalesman());
+		this.setTotalCustomers(customerService.count());
+		this.setTotalSalesman(salesmanService.count());
 		this.setIdMostExpensiveSale(saleService.getMostExpensiveSale().get().getId());
 		this.setWorstSalesman(salesmanService.getWorstSalesman().get().getName());
 	}

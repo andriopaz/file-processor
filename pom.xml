@@ -56,6 +56,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
 					<encoding>${project.build.sourceEncoding}</encoding>
+					<finalName>myapp</finalName>
 				</configuration>
 			</plugin>
 		</plugins>
